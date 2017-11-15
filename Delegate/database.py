@@ -37,6 +37,20 @@ def DBReadAll():
 	except:
 		return "ERROR"
 
+def DBRead(name):
+	try:
+		connection=mysql.connector.connect(user=mySQLUser, password=mySQLPassword, host=mySQLHost, database=mySQLDatabase)
+		cur=connection.cursor()
+		cur.execute("SELECT * FROM history WHERE name='"+name+"';")
+		ret=[]
+		for i in cur:
+			ret+=[[i[1].isoformat(" "),i[2],i[3]]]
+		cur.close()
+		connection.close()
+		return ret
+	except:
+		return "ERROR"
+
 #DBWrite("Lucas","Entrada")
 #DBWrite("Lucas","Saida")
 #print DBReadAll()
