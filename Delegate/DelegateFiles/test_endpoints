@@ -1,0 +1,23 @@
+#Fill in the blanks in the json data with the needed info
+
+# Gather new token
+curl -X GET -H 'Content-Type: application/json' -d "{'login': '', 'senha': ''}" localhost:8080/delegate/token
+
+#Verify token status
+curl -X GET -H 'Content-Type: application/json' -d '{"token":""}' localhost:8080/delegate/verify_token
+
+# Log user presence when they enter a lab
+# WARNING: 'chegada' stands for a boolean where 1=>user arriving,  0=> user leaving. Making multiple requets of the same kind in a row will generate database inconsistensy. Make sure you only issue the right kind by checking user presence.
+curl -X POST -H 'Content-Type: application/json' -d "{'token':'','lab_id':'','chegada':''}" localhost:8080/delegate/log_presence
+
+#Check if user is present
+curl -X POST -H 'Content-Type: application/json' -d "{'token':''}" localhost:8080/delegate/check_presence
+
+#Check user presence history
+curl -X POST -H 'Content-Type: application/json' -d "{'token':''}" localhost:8080/delegate/presence_history
+
+#Check user lab preferences
+curl -X POST -H 'Content-Type: application/json' -d '{"token":""}' localhost:8080/delegate/check_preferences
+
+#Update user lab preferences
+curl -X POST -H 'Content-Type: application/json' -d '{"token":"",'preferences':{'lab_id': ,'temperature': ,'umidade': ,'iluminacao': }}' localhost:8080/delegate/update_preferences

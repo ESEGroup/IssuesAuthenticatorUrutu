@@ -1,0 +1,35 @@
+from os import getcwd
+from os.path import join
+
+class URI:
+    def __init__(self, host, port, protocol="http"):
+        self.host = host
+        self.port = port
+        self.protocol = protocol
+
+    def __str__(self):
+        return "{}{}:{}".format(self.protocol + "://", self.host, self.port)
+
+class Config:
+    debug = True
+
+    issues_monitoring = URI("0.0.0.0", 8080)
+    imap_host = URI("imap.gmail.com", "587", protocol="")
+    smtp_host = URI("smtp.gmail.com", "587", protocol="")
+    email = "cos603.issuesmonitoring@gmail.com"
+    email_password = ""
+
+    mydenox_email = "noreply@denox.com.br"
+
+    log_timestamp_format = "%Y-%m-%d %H:%M:%S"
+
+    # Empty to assume stderr (forces stderr during DEBUG)
+    log_file = ""
+
+    # In minutes
+    parser_default_delay = 5
+    parser_max_delay = 60
+
+    session_duration = 60 * 30 # in seconds
+
+    db_path = join(getcwd(), "db", "Issues.db")

@@ -1,0 +1,118 @@
+{% extends 'menu.html' %}
+
+{% block title %}Issues Monitoring{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="/static/css/form.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/radio_input.css" />
+<link rel="stylesheet" type="text/css" href="/static/jquery-ui/addons/jquery-ui-timepicker-addon.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/grafico.css" />
+{% endblock %}
+
+{% block js %}
+<script src="/static/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/jquery-ui/addons/jquery-ui-timepicker-addon.js"></script>
+<script src="/static/jquery-ui/addons/i18n/jquery-ui-timepicker-pt-BR.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- JS do grafico -->
+<script src="/static/js/grafico.js"></script>
+{% if data|len > 0 %}
+<script>
+    drawIssuesChart({{data|safe}}, "{{chart_title}}");
+    showModal();
+</script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div id="nav-bar">
+
+    <div class="page-title">
+        <h3>Gráficos dos Eventos</h3>
+        <h4>{{lab_nome}}</h4>
+    </div>
+
+    <div class="neat-form" style="max-width: 680px !important;">
+        <form method="POST">
+
+            <fieldset>
+                <legend><span class="number">1</span> Tipo do Gráfico</legend>
+                <div class="container">
+
+                    <div class="radio">
+                        <input id="radio-umidade" name="chart_type" type="radio" value="umidade" checked>
+                        <label  for="radio-umidade" class="radio-label">Umidade do Laboratório</label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="radio-temp" name="chart_type" type="radio" value="temperatura">
+                        <label for="radio-temp" class="radio-label">Temperatura</label>
+                    </div>
+
+
+                    <div class="hidden-select hidden shrink-div">
+                        <select id="select-equip" name="target">
+                            <optgroup label="Temperatura">
+                                <option value="laboratorio">Laboratório</option>
+                                {% for equipamento in equipamentos %}
+                                    <option value="{{equipamento.id}}">{{equipamento.nome}}</option>
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+                    </div>
+
+
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend><span class="number">2</span> Datas de Início e Fim</legend>
+                <div class="date-tools">
+                    <input type="text" id="start-date" class="hidden">
+                    <input type="text" id="end-date" class="hidden">
+                    <input type="text" name="daterange" id="daterange" class="hidden">
+                    <div class="datepicker-class" id="datepicker-start"></div>
+                    <div class="datepicker-class" id="datepicker-end"></div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend><span class="number">3</span> Intervalo do Gráfico (minutos)</legend>
+                <div class="range-slider">
+                    <input class="range-slider__range" name="intervalo_grafico" id="intervalo_grafico" type="range" value="20" min="1" max="120" step="1">
+                    <span class="range-slider__value">0</span>
+                </div>
+            </fieldset>
+
+            <input type="submit" id="graphic" value="Gerar Gráfico" />
+        </form>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div id="curve-chart" style="display:none;"></div>
+        </div>
+
+    </div>
+
+    {% if data|len < 0%}
+    <div class="ui-widget msg" id="warning-chart" style="display: hidden;">
+        <div class="ui-state-warning ui-corner-all" style="padding: 0 .7em;">
+            <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em; margin-top: .04em"></span>
+            Não há registros o suficiente para gerar um gráfico.</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if data|len > 0%}
+    <div class="div-botao-estilizado">
+        <a href="#" class="btn-estilizado btn-estilizado-blue" onclick="showModal()">Exibir Gráfico</a>
+    </div>
+    {% endif %}
+    <div class="div-botao-estilizado">
+        <a href="{{url_for('laboratorio', id=lab_id, nome=lab_nome)}}" class="btn-estilizado btn-estilizado-blue">Voltar ao Laboratório</a>
+    </div>
+</div>
+{% endblock %}

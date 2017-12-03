@@ -1,0 +1,100 @@
+{% extends 'menu.html' %}
+
+{% block title %}Issues Monitoring{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="/static/css/table.css" />
+{% endblock %}
+
+{% block js %}
+<script src="/static/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/js/aprovar.js"></script>
+<script src="/static/js/ajax.js"></script>
+<script src="/static/js/gerenciar_usuarios.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="nav-bar">
+    <div id="view1">
+        <div class="page-title">
+            <h3>Gerenciar Usuários do Sistema</h3>
+            <h4>Os usuários do sistema cadastrados encontram-se abaixo.</h4>
+        </div>
+
+        {% if usuarios|len > 0 %}
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">E-mail</th>
+                    <th class="text-center">Autorizado</th>
+                    <th class="text-center">Administrador</th>
+                    <th class="text-center">Alterar</th>
+                    <th class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                {% for usuario in usuarios %}
+                <tr>
+                    <td class="text-center" title="{{usuario.login}}">{{usuario.nome}}</td>
+                    <td class="text-center">{{usuario.email}}</td>
+                    {% if usuario.id != session["id"] %}
+                        <td class="text-center">
+                            <label class="switch">
+                                <input type="checkbox" data-url="{{url_for('aprovar_usuario_post', id=usuario.id)}}" class="aprovar" {% if usuario.data_aprovacao|existe %}checked="checked"{% endif %}>
+                                <div class="check-slide round"></div>
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <label class="switch">
+                                <input type="checkbox" data-url="{{url_for('editar_status_administrador', id=usuario.id)}}" class="aprovar" {% if usuario.admin %}checked="checked"{% endif %}>
+                                <div class="check-slide round"></div>
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <input data-url="{{url_for('alterar_usuario_sistema', id=usuario.id)}}"
+                                   data-nome="{{usuario.nome}}"
+                                   type="image" src="/static/img/pencil.png"
+                                   alt="Alterar" class="delete-table-opt alter-btn">
+                        </td>
+                        <td class="text-center">
+                            <input data-url="{{url_for('remover_usuario_sistema', id=usuario.id)}}"
+                                   data-nome="{{usuario.nome}}"
+                                   type="image" src="/static/img/delete.png"
+                                   alt="Apagar" class="delete-table-opt delete-btn">
+                        </td>
+                    {% else %}
+                        <td class="text-center one-word-per-line">-</td>
+                        <td class="text-center one-word-per-line">-</td>
+                        <td class="text-center">
+                            <input data-url="{{url_for('alterar_usuario_sistema', id=usuario.id)}}"
+                                   data-nome="{{usuario.nome}}"
+                                   type="image" src="/static/img/pencil.png"
+                                   alt="Alterar" class="delete-table-opt alter-btn">
+                        </td>
+                        <td class="text-center one-word-per-line">-</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if (not (usuarios|len == 1 and usuarios[0] != session["id"])) %}
+        <div class="div-botao-estilizado trocar-view-btn">
+            <a id="salvar" href="#" class="btn-estilizado btn-estilizado-blue">Salvar</a>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="ui-widget msg">
+            <div class="ui-state-warning ui-corner-all" style="padding: 0 .7em;">
+                <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em; margin-top: .04em"></span>
+                Não há usuários do sistema aguardando autorização.</p>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+</div>
+{% endblock %}

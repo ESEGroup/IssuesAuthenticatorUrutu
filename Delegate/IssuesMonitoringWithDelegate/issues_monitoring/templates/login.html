@@ -1,0 +1,35 @@
+{% extends 'menu.html' %}
+
+{% block title %}Issues Monitoring{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="/static/css/form.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/labs.css" />
+{% endblock %}
+
+{% block js %}
+<script src="/static/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/js/labs.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="nav-bar">
+    <div class="page-title">
+        <h3>Bem-vindo</h3>
+        <h4>Faça login para acessar o sistema Issues Monitoring.</h4>
+    </div>
+
+    <div class="neat-form" id="hidden-form">
+        <form method="POST" action="{{url_for('login')}}">
+            <fieldset>
+                <legend><span class="number">!</span> Informações de Acesso</legend>
+                <input type="text" name="login" placeholder="Login (ex.: jcviola)">
+                <input type="password" name="senha" placeholder="Senha">
+            </fieldset>
+            <input type="submit" value="Entrar" />
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}
