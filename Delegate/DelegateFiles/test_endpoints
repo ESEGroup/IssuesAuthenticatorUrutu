@@ -2,7 +2,7 @@
 #Every input must be formatted in JSON and every request that requires authentication must have the issued token at the request BODY.
 
 # Gather new token
-curl -X GET -H 'Content-Type: application/json' -d "{'login': '', 'senha': ''}" localhost:8080/delegate/token
+curl -X POST -H 'Content-Type: application/json' -d "{'login': '', 'senha': ''}" localhost:8080/delegate/token
 # Expected output:
 # Sucess: {'token': token.decode('ascii')}
 # Error: {'e': 'Error generating token.'}
