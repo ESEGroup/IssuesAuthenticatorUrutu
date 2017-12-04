@@ -8,27 +8,6 @@ from collections import namedtuple
 def _json_object_hook(d): return namedtuple('X', d.keys())(*d.values())
 def json2obj(data): return json.loads(data, object_hook=_json_object_hook)
 
-@app.route('/delegate/login', methods=['POST'])
-def delegate():
-	r = request.get_json()
-	if r is not None:
-		try:
-			login = r['login']
-			senha = r['senha']		
-			if(controllers.autenticar(login, senha)):
-				print("OKEI")
-			else:
-				print("DEU MERDA")
-		except:
-			raise
-	else:
-		print("Couldn't get json from POST request")
-	return "JSON Request error."
-
-@app.route('/delegate', methods=['GET'])
-def get_delegate():
-	return 'get delegate'
-
 
 @app.route('/delegate/token')
 def get_auth_token():
