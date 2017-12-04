@@ -2,12 +2,21 @@
   <string name="app_name">IssuesAppthenticator</string>
 
   <!-- Strings related to login -->
-  <string name="prompt_email">Email</string>
+  <string name="prompt_email">Login</string>
   <string name="prompt_password">Senha</string>
   <string name="action_sign_in">Entrar</string>
+  <string name="action_notify">Notificar</string>
   <string name="action_sign_in_short">Entrar</string>
   <string name="error_invalid_email">Email inválido</string>
   <string name="error_invalid_password">Senha inválida</string>
   <string name="error_incorrect_password">Senha incorreta</string>
   <string name="error_field_required">Esse campo é obrigatório</string>
+  <string name="action_logout">Logout</string>
+  <string name="text_temp">Temperatura</string>
+  <string name="val_temp">%1$.1fºC</string>
+  <string name="text_humidity">Humidade</string>
+  <string name="val_humidity">%1$d%%</string>
+  <string name="text_light">Luminosidade</string>
+  <string name="val_light">%1$d%%</string>
+  <string name="action_save">Salvar</string>
 </resources>

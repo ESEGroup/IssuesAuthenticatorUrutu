@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="match_parent" android:layout_width="match_parent"
+              android:orientation="vertical" android:gravity="center_horizontal">
+
+  <ProgressBar
+      android:id="@+id/mainProgress"
+      style="?android:attr/progressBarStyleLarge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:visibility="gone"/>
+
+  <LinearLayout
+      android:id="@+id/mainForm"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+    <TextView
+        android:text="@string/text_temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/tempTitle" android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" android:textSize="18sp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <Button
+          android:text="-"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/tempPlus" android:layout_weight="0"
+          android:textSize="24sp"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/tempVal" android:layout_weight="10"
+          android:textAlignment="center" android:textSize="24sp" android:contentDescription="ºC"/>
+      <Button
+          android:text="+"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/tempMinus" android:layout_weight="0"
+          android:textSize="24sp"/>
+    </LinearLayout>
+    <TextView
+        android:text="@string/text_humidity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/humTitle" android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" android:textSize="18sp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <Button
+          android:text="-"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/humMinus" android:layout_weight="0"
+          android:textSize="24sp"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/humVal" android:layout_weight="10"
+          android:textAlignment="center" android:textSize="24sp" android:contentDescription="%"/>
+      <Button
+          android:text="+"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/humPlus" android:layout_weight="0"
+          android:textSize="24sp"/>
+    </LinearLayout>
+    <TextView
+        android:text="@string/text_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/lightTitle" android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" android:textSize="18sp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <Button
+          android:text="-"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/lightMinus" android:layout_weight="0"
+          android:textSize="24sp"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/lightVal" android:layout_weight="10"
+          android:textAlignment="center" android:textSize="24sp" android:contentDescription="%"/>
+      <Button
+          android:text="+"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" android:id="@+id/lightPlus" android:layout_weight="0"
+          android:textSize="24sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" android:gravity="bottom" android:layout_weight="1">
+      <Button
+          android:text="@string/action_save"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" android:id="@+id/save"/>
+      <Button
+          android:text="@string/action_logout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" android:id="@+id/logout"/>
+      <TextView
+          android:layout_width="match_parent"
+          android:id="@+id/macAddr" android:layout_height="wrap_content" android:textAlignment="center"
+      />
+    </LinearLayout>
+
+  </LinearLayout>
+</LinearLayout>
